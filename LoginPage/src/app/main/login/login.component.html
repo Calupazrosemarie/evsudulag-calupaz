@@ -1,0 +1,32 @@
+<div class="container">
+    <form [formGroup]="LoginForm" (ngSubmit)="onLogin()">
+        <h3>Access Your Account</h3>
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input
+              matInput
+              type="email"
+              formControlName = "username"
+              placeholder="pat@example.com"
+              required
+            />
+              <mat-error *ngIf="username?.hasError('required')">Username is Required</mat-error>
+              <mat-error *ngIf="username?.hasError('email')">Username msut be an email</mat-error>
+            
+          </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="password"
+              formControlName = "password"
+              required
+            />
+              <mat-error *ngIf="password?.hasError('required')">Password is Required</mat-error>
+            
+          </mat-form-field>
+
+          <button type="submit" mat-flat-button [disabled]="LoginForm.invalid">Login</button>
+
+    </form>
+</div>
