@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   LoginForm: FormGroup;
+  errorMsg:  string = '';
 
   constructor(private form: FormBuilder, private userService: UserService, private router: Router){
     this.LoginForm = this.form.group({
@@ -27,13 +28,16 @@ export class LoginComponent {
   }
 
   onLogin(){
-    const { username, password } = this.LoginForm.value;
-
-    if(this.userService.validateLogin(username, password)){
-      this.router.navigate(['/main/detail'])
-    }
-    else {
-      console.log('error');
-    }
+    this.userService.validateLogin(this.LoginForm.value).subscribe({
+      next: (data) => {
+        if (data?.user) {
+          this.router.navigate(['/main/dashboard']);
+          this.errorMsg = '';
+        }
+      },
+      error: () => {
+          this.errorMsg = 'Invalid username or password.';
+      }
+    });
   }
 }

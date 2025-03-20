@@ -1,27 +1,22 @@
 import { Injectable } from '@angular/core';
 import { UserDetail } from '../mock/UserData';
 import { UserModel } from '../Model/UserModel';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  private currentUser: UserModel | null = null;
 
-  validateLogin(username: string, password: string) : boolean {
-    const user = UserDetail.find(u => u.username === username && u.password === password);
-
-    if (user) {
-      this.currentUser = user;
-      return true;
-    }
-    return false;
+  validateLogin(user: any): Observable<any> {
+    return this.http.post('http://localhost:8000/login', user)
   }
   
-  getCurentUser() : UserModel | null {
-    return this.currentUser;
-  }
+  // getCurentUser() : UserModel | null {
+  //   return this.currentUser;
+  // }
 }

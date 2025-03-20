@@ -5,15 +5,16 @@ import { RoutesModule } from './routes.module';
 import { ReactiveFormsModule } from '@angular/forms'
 import { LoginComponent } from './pages/login/login.component';
 import { DetailComponent } from './pages/detail/detail.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 @NgModule({
-  declarations: [ LoginComponent, DetailComponent ],
+  declarations: [ LoginComponent, DetailComponent, DashboardComponent ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    RoutesModule
+    RoutesModule,
   ]
 })
 export class UsersModule { }
